@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+
+<body>
+    <header id="header"></header> <!-- JavaScript will load this -->
+
+    <main>
+        <section id="map-container">
+        <h2>Truck Locations</h2>
+        <div id="map"></div>
+    </section>
+
+    <section id="trucks-table">
+        <h2>Available Trucks</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Model</th>
+                    <th>Capacity</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody id="trucks-list">
+                <!-- Trucks data will be populated here -->
+            </tbody>
+        </table>
+    </section>
+    </main>
+
+    <footer id="footer"></footer> <!-- JavaScript will load this -->
+
+    <script type="module" src="../scripts/trucks.js"></script>
+</body>
+</html>
