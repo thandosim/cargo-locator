@@ -35,7 +35,6 @@ async function populateTrucksTable() {
   tbody.innerHTML = ''; // Clear previous entries
 
   trucks.forEach((truck) => {
-    // Only show available trucks
     if (truck.truck_availability) {
       const row = document.createElement('tr');
       row.innerHTML = `
@@ -44,10 +43,18 @@ async function populateTrucksTable() {
         <td>${truck.truck_capacity} kg</td>
         <td>${truck.truck_location} (${truck.truck_latitude}, ${truck.truck_longitude})</td>
       `;
+      
+      // Make row clickable
+      row.style.cursor = 'pointer';
+      row.addEventListener('click', () => {
+        window.location.href = `truck-details.html?id=${truck.truck_id}`;
+      });
+
       tbody.appendChild(row);
     }
   });
 }
+
 
 // Call function to populate table on page load
 populateTrucksTable();
@@ -61,30 +68,71 @@ function latLonToTile(lat, lon, zoom) {
   return { x, y };
 }
 
+let currentZoom = 6;
+let centerLat = -26.2041; // Johannesburg
+let centerLon = 28.0473;
+const apiKey = "5cc84ca63b5941768dd776f47d3ee5b2";
 
+async function createMap(lat, lon, zoom) {
+    const mapContainer = document.getElementById('map');
+    mapContainer.innerHTML = '';
+    mapContainer.style.position = "relative";
+    mapContainer.style.width = "768px";
+    mapContainer.style.height = "768px";
+    mapContainer.style.overflow = "hidden";
 
-function createMap(lat, lon, zoom ) {
-  const mapContainer = document.getElementById('map');
-  
-      // Moderate zoom level to see southern Africa
-    const { x, y } = latLonToTile(lat, lon, zoom);
+    const tileSize = 256;
+    const centerTile = latLonToTile(lat, lon, zoom);
+    const startX = centerTile.x - 1;
+    const startY = centerTile.y - 1;
 
-    const apiKey = "5cc84ca63b5941768dd776f47d3ee5b2";
+    // Add map tiles (3x3)
+    for (let dx = 0; dx < 3; dx++) {
+        for (let dy = 0; dy < 3; dy++) {
+            const x = startX + dx;
+            const y = startY + dy;
+            const tileUrl = `https://maps.geoapify.com/v1/tile/carto/${zoom}/${x}/${y}.png?apiKey=${apiKey}`;
+            const img = document.createElement('img');
+            img.src = tileUrl;
+            img.width = tileSize;
+            img.height = tileSize;
+            img.style.position = "absolute";
+            img.style.left = `${dx * tileSize}px`;
+            img.style.top = `${dy * tileSize}px`;
+            mapContainer.appendChild(img);
+        }
+    }
 
-    const tileUrl = `https://maps.geoapify.com/v1/tile/carto/${zoom}/${x}/${y}.png?apiKey=${apiKey}`;
+    // Load truck markers
+    const trucks = await fetchTrucks();
 
-  const iframe = document.createElement('iframe');
-  iframe.src = tileUrl;
-  iframe.width = 600;
-  iframe.height = 400;
+    trucks.forEach(truck => {
+        if (!truck.truck_availability) return;
 
-  // Clear previous map and append the new image
-  mapContainer.innerHTML = ''; 
-  mapContainer.appendChild(iframe);
+        const tile = latLonToTile(truck.truck_latitude, truck.truck_longitude, zoom);
+        const dx = tile.x - startX;
+        const dy = tile.y - startY;
+
+        if (dx >= 0 && dx < 3 && dy >= 0 && dy < 3) {
+            const marker = document.createElement('div');
+            marker.style.width = '20px';
+            marker.style.height = '20px';
+            marker.style.borderRadius = '50%';
+            marker.style.background = 'red';
+            marker.style.position = 'absolute';
+            marker.style.left = `${dx * tileSize + 118}px`; // adjust for visual center
+            marker.style.top = `${dy * tileSize + 118}px`;
+            marker.style.cursor = 'pointer';
+            marker.title = truck.truck_name;
+
+            marker.addEventListener('click', () => {
+                window.location.href = `truck-details.html?id=${truck.truck_id}`;
+            });
+
+            mapContainer.appendChild(marker);
+        }
+    });
 }
 
-// Example usage
-const lat = -26.2041;  // Johannesburg
-const lon = 28.0473;
-const zoom = 6;
-createMap(lat, lon, zoom);
+// Initial map render
+createMap(centerLat, centerLon, currentZoom);

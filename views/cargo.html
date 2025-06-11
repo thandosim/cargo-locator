@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+
+<body>
+  <header id="header"></header> <!-- JavaScript will load this -->
+
+  <main>
+
+    <section id="map-container">
+      <h2>Cargo Locations</h2>
+      <div id="map"></div>
+    </section>
+
+    <section id="cargo-table">
+      <h2>Available Cargo</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Weight</th>
+            <th>Pickup Location</th>
+            <th>Destination</th>
+          </tr>
+        </thead>
+        <tbody id="cargo-list">
+          <!-- Cargo data will be populated here -->
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer id="footer"></footer> <!-- JavaScript will load this -->
+
+  <script type="module" src="../scripts/cargo.js"></script>
+</body>
+</html>
