@@ -52,7 +52,7 @@ async function loadTruckDetails() {
 
     if (!reserveError) {
       alert('Truck reserved successfully!');
-      loadTruckDetails(); // Refresh info
+      loadTruckDetails(); 
     } else {
       alert('Error reserving truck.');
     }

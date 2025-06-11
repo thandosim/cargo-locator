@@ -32,7 +32,7 @@ async function populateTrucksTable() {
   const trucks = await fetchTrucks();
   const tbody = document.getElementById('trucks-list');
 
-  tbody.innerHTML = ''; // Clear previous entries
+  tbody.innerHTML = ''; 
 
   trucks.forEach((truck) => {
     if (truck.truck_availability) {
@@ -44,7 +44,7 @@ async function populateTrucksTable() {
         <td>${truck.truck_location} (${truck.truck_latitude}, ${truck.truck_longitude})</td>
       `;
       
-      // Make row clickable
+      
       row.style.cursor = 'pointer';
       row.addEventListener('click', () => {
         window.location.href = `truck-details.html?id=${truck.truck_id}`;
@@ -56,7 +56,7 @@ async function populateTrucksTable() {
 }
 
 
-// Call function to populate table on page load
+
 populateTrucksTable();
 
 
@@ -86,7 +86,7 @@ async function createMap(lat, lon, zoom) {
     const startX = centerTile.x - 1;
     const startY = centerTile.y - 1;
 
-    // Add map tiles (3x3)
+    
     for (let dx = 0; dx < 3; dx++) {
         for (let dy = 0; dy < 3; dy++) {
             const x = startX + dx;
@@ -103,7 +103,7 @@ async function createMap(lat, lon, zoom) {
         }
     }
 
-    // Load truck markers
+    
     const trucks = await fetchTrucks();
 
     trucks.forEach(truck => {
@@ -120,7 +120,7 @@ async function createMap(lat, lon, zoom) {
             marker.style.borderRadius = '50%';
             marker.style.background = 'red';
             marker.style.position = 'absolute';
-            marker.style.left = `${dx * tileSize + 118}px`; // adjust for visual center
+            marker.style.left = `${dx * tileSize + 118}px`; 
             marker.style.top = `${dy * tileSize + 118}px`;
             marker.style.cursor = 'pointer';
             marker.title = truck.truck_name;
@@ -134,5 +134,5 @@ async function createMap(lat, lon, zoom) {
     });
 }
 
-// Initial map render
+
 createMap(centerLat, centerLon, currentZoom);
