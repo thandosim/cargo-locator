@@ -12,7 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", displayViewedTrucks);
 
 window.addEventListener("load", function () {
-    document.getElementById("loader").classList.add("hidden");
+    setTimeout(function () {
+        document.getElementById("loader").classList.add("hidden");
+    }, 2000); 
 });
 
 

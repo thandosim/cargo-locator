@@ -11,6 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
   loadCargoDetails();
 });
 
+window.addEventListener("load", function () {
+    setTimeout(function () {
+        document.getElementById("loader").classList.add("hidden");
+    }, 2000); // 2-second delay
+});
+
+
 const supabaseUrl = 'https://njanrkfelbmopbmwabgd.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qYW5ya2ZlbGJtb3BibXdhYmdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk2MzQyODQsImV4cCI6MjA2NTIxMDI4NH0.ddxg0Jm44oiMuvkSwaYmLGHP_eCMRvNxilgWLE0QFJ0'; // Keep this key in sync
 const supabase = createClient(supabaseUrl, supabaseKey);
