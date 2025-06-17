@@ -40,6 +40,9 @@ async function loadTruckDetails() {
     return;
   }
 
+  // Save the viewd truck in local storage
+  saveViewedTruck(truck);
+
   truckInfoDiv.innerHTML = `
     <p><strong>ID:</strong> ${truck.truck_id}</p>
     <p><strong>Name:</strong> ${truck.truck_name}</p>
@@ -124,4 +127,19 @@ function calculateFuelCost(distance, mpg, fuelPrice) {
 
   const gallonsNeeded = distance / (mpg * 1.60934); // Convert MPG to km per liter
   return gallonsNeeded * fuelPrice;
+}
+
+function saveViewedTruck(truck) {
+  let viewedTrucks = JSON.parse(localStorage.getItem('viewedTrucks')) || [];
+
+  // Remove duplicate entries
+  viewedTrucks = viewedTrucks.filter(t => t.truck_id !== truck.truck_id);
+
+  // Add the new truck details
+  viewedTrucks.push(truck);
+
+  // Keep only the last three viewed trucks
+  viewedTrucks = viewedTrucks.slice(-3);
+
+  localStorage.setItem('viewedTrucks', JSON.stringify(viewedTrucks));
 }
