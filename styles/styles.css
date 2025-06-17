@@ -186,6 +186,7 @@ tr:hover {
 #map-container {
     margin-top: 20px;
     text-align: center;
+    margin: 0 auto;
 }
 
 #map {
@@ -193,6 +194,7 @@ tr:hover {
     height: 300px;
     border-radius: 8px;
     background: #ddd;
+    margin: 0 auto;
 }
 
 /* Reserve Button */
