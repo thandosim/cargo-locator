@@ -99,7 +99,7 @@ h2 {
 }
 
 a, button, .choice {
-    cursor: url("/images/wheel.jpg"), auto;
+    cursor: url("/images/wheel.png"), auto;
 }
 
 /* Footer dynamic updates */
