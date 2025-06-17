@@ -8,14 +8,22 @@
   <main>
     <section id="truck-details-section">
       <h1>Truck Details</h1>
-      <div id="truck-info" class="truck-info">
-        
+      
+      <div id="route"></div>
+
+      <div id="truck-info" class="truck-info"></div>
+
+      <div id="fuel-cost-info">
+        <p><strong>Distance to Truck:</strong> <span id="distance"></span> km</p>
+        <p><strong>Diesel Price:</strong> $<span id="diesel-price"></span> per gallon</p>
+        <p><strong>Estimated Fuel Cost:</strong> $<span id="estimated-fuel-cost"></span></p>
       </div>
+
       <button id="reserve-btn" class="reserve-btn">Reserve Truck</button>
     </section>
   </main>
 
-  <footer id="footer"></footer> 
+  <footer id="footer"></footer>
 
   <script type="module" src="../scripts/truck-detail.js"></script>
 </body>
