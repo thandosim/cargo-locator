@@ -136,3 +136,9 @@ async function createMap(lat, lon, zoom) {
 
 
 createMap(centerLat, centerLon, currentZoom);
+
+window.addEventListener("load", function () {
+    setTimeout(function () {
+        document.getElementById("loader").classList.add("hidden");
+    }, 2000); 
+});

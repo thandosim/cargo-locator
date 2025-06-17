@@ -7,3 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     updateFooter();
   });
 });
+
+window.addEventListener("load", function () {
+    setTimeout(function () {
+        document.getElementById("loader").classList.add("hidden");
+    }, 2000); // 2-second delay
+});

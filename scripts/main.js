@@ -11,6 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", displayViewedTrucks);
 
+window.addEventListener("load", function () {
+    setTimeout(function () {
+        document.getElementById("loader").classList.add("hidden");
+    }, 2000); 
+});
+
+
 
 function displayViewedTrucks() {
     const viewedTrucks = JSON.parse(localStorage.getItem('viewedTrucks')) || [];
@@ -33,4 +40,12 @@ function displayViewedTrucks() {
         `;
         tbody.appendChild(row);
     });
+}
+
+function showLoader() {
+    document.getElementById('loader').style.display = 'block';
+}
+
+function hideLoader() {
+    document.getElementById('loader').style.display = 'none';
 }
