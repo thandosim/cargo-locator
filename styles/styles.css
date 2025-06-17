@@ -98,6 +98,10 @@ h2 {
     text-align: center;
 }
 
+a, button, .choice {
+    cursor: url("/images/wheel.jpg"), auto;
+}
+
 /* Footer dynamic updates */
 #last-modified {
     font-size: 14px;
