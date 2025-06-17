@@ -94,6 +94,10 @@ nav ul li a {
     transform: scale(1.05);
 }
 
+h2 {
+    text-align: center;
+}
+
 /* Footer dynamic updates */
 #last-modified {
     font-size: 14px;
@@ -245,6 +249,8 @@ tr:hover {
 
     table {
         font-size: 12px;
+        max-width: 600px;
+        margin: 0 auto;
     }
     
     th, td {
